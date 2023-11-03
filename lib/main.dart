@@ -59,10 +59,11 @@
 //   }
 // }
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:money_management2/OnbordingScreen/splash.dart';
-import 'package:money_management2/models/category/category_model.dart';
-import 'package:money_management2/models/transactions/transaction_model.dart';
+import 'package:hive_flutter/adapters.dart';
+
+import 'OnbordingScreen/splash.dart';
+import 'models/category/category_model.dart';
+import 'models/transactions/transaction_model.dart';
 
 int? isviewsd;
 

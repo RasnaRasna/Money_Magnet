@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:money_management2/db/category/category_db.dart';
-import 'package:money_management2/models/category/category_model.dart';
+
+import '../../../db/category/category_db.dart';
+import '../../../models/category/category_model.dart';
 
 Future<void> addPopupOnly({context, required selectedCategoryType}) async {
   final nameEditingController = TextEditingController();

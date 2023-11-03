@@ -1,9 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:money_management2/db/transaction/transaction_db.dart';
-import 'package:money_management2/models/transactions/transaction_model.dart';
-import 'package:money_management2/widgets/pages/ViewAll/view_all.dart';
+
+import '../../../db/transaction/transaction_db.dart';
+import '../../../models/transactions/transaction_model.dart';
+import '../ViewAll/view_all.dart';
 
 final TextEditingController searchQueryController = TextEditingController();
 ValueNotifier<List<transactionModel>> overViewListNotifier = ValueNotifier([]);

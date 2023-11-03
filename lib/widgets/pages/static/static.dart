@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../models/category/category_model.dart';
+import 'all_statics.dart';
+import 'expense_income_statics.dart';
 // import 'package:google_fonts/google_fonts.dart';
-import 'package:money_management2/models/category/category_model.dart';
-import 'package:money_management2/widgets/pages/static/all_statics.dart';
-import 'package:money_management2/widgets/pages/static/expense_income_statics.dart';
 
 class Statics extends StatelessWidget {
   const Statics({super.key});

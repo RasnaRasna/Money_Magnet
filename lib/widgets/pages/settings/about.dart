@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:money_management2/widgets/bottonm%20google/gbottom_bar.dart';
+
+import '../../bottonm google/gbottom_bar.dart';
 
 class About extends StatelessWidget {
   const About({super.key});

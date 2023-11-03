@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:money_management2/widgets/pages/search/search.dart';
-import 'package:money_management2/widgets/pages/search/search_tile.dart';
+import 'package:money_magnet/widgets/pages/search/search.dart';
+import 'package:money_magnet/widgets/pages/search/search_tile.dart';
 
 import '../../../models/transactions/transaction_model.dart';
 
@@ -17,7 +16,7 @@ class CustomSearch extends StatelessWidget {
         body: Column(
           children: [
             SearchField(),
-            const Expanded(
+            Expanded(
               child: SearchTiles(),
             ),
           ],

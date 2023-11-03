@@ -1,9 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:money_management2/db/transaction/transaction_db.dart';
-import 'package:money_management2/models/category/category_model.dart';
-import 'package:money_management2/models/transactions/transaction_model.dart';
+import 'package:money_magnet/models/transactions/transaction_model.dart';
+
 import 'package:syncfusion_flutter_charts/charts.dart';
+
+import '../../../db/transaction/transaction_db.dart';
+import '../../../models/category/category_model.dart';
 
 class ExpenseStatics extends StatelessWidget {
   CategoryType incomeOrExpense;
@@ -56,10 +58,10 @@ class ExpenseStatics extends StatelessWidget {
                                   dataLabelSettings:
                                       const DataLabelSettings(isVisible: true)),
                             ],
-                            legend: Legend(
+                            legend: const Legend(
                                 isVisible: true,
                                 // position: LegendPosition.left,
-                                textStyle: const TextStyle(fontSize: 20)),
+                                textStyle: TextStyle(fontSize: 20)),
                           )
                         : Align(
                             alignment: Alignment.center,

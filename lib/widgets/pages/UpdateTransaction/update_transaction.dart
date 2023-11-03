@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:money_management2/db/transaction/transaction_db.dart';
-import 'package:money_management2/models/category/category_model.dart';
-import 'package:money_management2/models/transactions/transaction_model.dart';
-import 'package:money_management2/widgets/pages/ViewAll/view_all.dart';
-import 'package:money_management2/widgets/pages/search/search.dart';
+
 import '../../../db/category/category_db.dart';
+import '../../../db/transaction/transaction_db.dart';
+import '../../../models/category/category_model.dart';
+import '../../../models/transactions/transaction_model.dart';
 import '../Addtranscation/add_category_popup.dart';
+import '../ViewAll/view_all.dart';
+import '../search/search.dart';
 
 class EditTransaction extends StatefulWidget {
   String? id;

@@ -2,11 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:money_management2/db/transaction/transaction_db.dart';
-import 'package:money_management2/models/category/category_model.dart';
-import 'package:money_management2/models/transactions/transaction_model.dart';
-import 'package:money_management2/widgets/pages/UpdateTransaction/update_transaction.dart';
-import 'package:money_management2/widgets/pages/search/search.dart';
+import 'package:money_magnet/widgets/pages/search/search.dart';
+
+import '../../../db/transaction/transaction_db.dart';
+import '../../../models/category/category_model.dart';
+import '../../../models/transactions/transaction_model.dart';
+import '../UpdateTransaction/update_transaction.dart';
 
 class SlidableTransaction extends StatelessWidget {
   const SlidableTransaction({super.key, required this.transaction});

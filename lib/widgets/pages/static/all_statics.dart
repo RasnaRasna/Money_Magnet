@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:money_management2/db/transaction/transaction_db.dart';
-import 'package:money_management2/models/category/category_model.dart';
-import 'package:money_management2/models/transactions/transaction_model.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+
+import '../../../db/transaction/transaction_db.dart';
+import '../../../models/category/category_model.dart';
+import '../../../models/transactions/transaction_model.dart';
 
 class Allstatics extends StatelessWidget {
   const Allstatics({super.key});

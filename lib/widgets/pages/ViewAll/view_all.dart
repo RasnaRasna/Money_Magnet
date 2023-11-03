@@ -1,12 +1,12 @@
 import 'package:custom_date_range_picker/custom_date_range_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:money_management2/models/category/category_model.dart';
-import 'package:money_management2/models/transactions/transaction_model.dart';
-import 'package:money_management2/widgets/pages/ViewAll/viewslide.dart';
-import 'package:money_management2/widgets/pages/search/search_root.dart';
+import 'package:money_magnet/widgets/pages/ViewAll/viewslide.dart';
 
 import '../../../db/transaction/transaction_db.dart';
+import '../../../models/category/category_model.dart';
+import '../../../models/transactions/transaction_model.dart';
+import '../search/search_root.dart';
 
 ValueNotifier<List<transactionModel>> allList = ValueNotifier([]);
 ValueNotifier<List<transactionModel>> Showlist = ValueNotifier([]);

@@ -3,12 +3,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
-
-import 'package:money_management2/models/transactions/transaction_model.dart';
-import 'package:money_management2/widgets/pages/ViewAll/view_all.dart';
-
-import 'package:money_management2/widgets/pages/search/search.dart';
-import 'package:money_management2/widgets/pages/search/slidable_list_tile.dart';
+import 'package:money_magnet/widgets/pages/ViewAll/view_all.dart';
+import 'package:money_magnet/widgets/pages/search/search.dart';
+import 'package:money_magnet/widgets/pages/search/slidable_list_tile.dart';
 
 class SearchTiles extends StatelessWidget {
   const SearchTiles({super.key});
