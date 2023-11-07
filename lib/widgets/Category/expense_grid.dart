@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../db/category/category_db.dart';
 import '../../models/category/category_model.dart';
@@ -44,10 +43,7 @@ class ExpenseCategory extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: ListTile(
-                          title: Text(
-                            Category.name,
-                            style: GoogleFonts.acme(),
-                          ),
+                          title: Text(Category.name),
                           trailing: IconButton(
                             onPressed: () {
                               showDialog(
@@ -68,10 +64,7 @@ class ExpenseCategory extends StatelessWidget {
                                                 .deleteCategory(Category.id);
                                             Navigator.of(ctx).pop();
                                           },
-                                          child: const Text(
-                                            'Yes',
-                                            style: TextStyle(color: Colors.red),
-                                          ),
+                                          child: const Text('Yes'),
                                         ),
                                         TextButton(
                                           onPressed: () {
@@ -107,10 +100,7 @@ class ExpenseCategory extends StatelessWidget {
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: ListTile(
-                            title: Text(
-                              Category.name,
-                              style: GoogleFonts.acme(),
-                            ),
+                            title: Text(Category.name),
                             trailing: IconButton(
                               onPressed: () {
                                 showDialog(
@@ -132,11 +122,7 @@ class ExpenseCategory extends StatelessWidget {
                                                   .deleteCategory(Category.id);
                                               Navigator.of(ctx).pop();
                                             },
-                                            child: const Text(
-                                              'Yes',
-                                              style:
-                                                  TextStyle(color: Colors.red),
-                                            ),
+                                            child: const Text('Yes'),
                                           ),
                                           TextButton(
                                             onPressed: () {

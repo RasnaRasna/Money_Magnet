@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:money_magnet/widgets/pages/Hometransaction/transactionn.dart';
 
 // import 'package:google_fonts/google_fonts.dart';
 
@@ -9,6 +8,7 @@ import '../../../db/transaction/transaction_db.dart';
 import '../../../models/category/category_model.dart';
 import '../../../models/transactions/transaction_model.dart';
 import '../Addtranscation/addtransaction.dart';
+import '../ViewAll/transactionn.dart';
 import '../ViewAll/view_all.dart';
 import '../search/search.dart';
 import '../settings/menunavbar.dart';
@@ -55,7 +55,7 @@ class HomeTransactonn extends StatelessWidget {
               backgroundColor: Colors.transparent,
               centerTitle: true,
               title: Text(
-                'Money Moves',
+                'Money Magnet',
                 style: GoogleFonts.acme(fontSize: 30, color: Colors.black),
               ),
             ),
@@ -78,7 +78,6 @@ class HomeTransactonn extends StatelessWidget {
               child: Column(
                 children: [
                   homecard(totalbalance, totalexpense, totalincome),
-
                   ListTile(
                     leading: Padding(
                       padding: EdgeInsets.only(top: 20, left: 10),
@@ -120,7 +119,7 @@ class HomeTransactonn extends StatelessWidget {
 
                   // transactions
 
-                  const Expanded(child: TransactonTiles()),
+                  Expanded(child: TransactonTiles()),
                 ],
               ),
             ),

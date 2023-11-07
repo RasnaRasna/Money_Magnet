@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../db/transaction/transaction_db.dart';
@@ -6,7 +7,7 @@ import '../../../models/category/category_model.dart';
 import '../../../models/transactions/transaction_model.dart';
 
 class Allstatics extends StatelessWidget {
-  const Allstatics({super.key});
+  const Allstatics({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,6 @@ class Allstatics extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ValueListenableBuilder(
                 valueListenable: TransactionDB.instance.transactionListNotifier,

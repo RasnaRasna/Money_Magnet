@@ -3,9 +3,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
-import 'package:money_magnet/widgets/pages/ViewAll/view_all.dart';
 import 'package:money_magnet/widgets/pages/search/search.dart';
 import 'package:money_magnet/widgets/pages/search/slidable_list_tile.dart';
+
+import '../ViewAll/view_all.dart';
 
 class SearchTiles extends StatelessWidget {
   const SearchTiles({super.key});
@@ -27,7 +28,7 @@ class SearchTiles extends StatelessWidget {
                 child: ValueListenableBuilder(
                   builder: (context, value, child) => ListView.separated(
                     itemBuilder: (context, index) {
-                      log("buuildd");
+                      // log("buuildd");
                       // transactionModel transaction = newList[index];
                       return SlidableTransaction(transaction: value[index]);
                     },

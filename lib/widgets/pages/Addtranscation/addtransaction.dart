@@ -1,48 +1,42 @@
-import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:money_magnet/widgets/pages/Addtranscation/transactionform.dart';
+
+import 'package:provider/provider.dart';
 
 import '../../../db/category/category_db.dart';
-import '../../../db/transaction/transaction_db.dart';
+import '../../../db/providers/addtransaction_provider.dart';
 import '../../../models/category/category_model.dart';
-import '../../../models/transactions/transaction_model.dart';
 import 'add_category_popup.dart';
-// TextEditingController addcategorycontroller=TextEditingController();
 
-class AddTransaction extends StatefulWidget {
-  const AddTransaction({super.key});
+class AddTransaction extends StatelessWidget {
+  const AddTransaction({Key? key}) : super(key: key);
 
   @override
-  State<AddTransaction> createState() => _AddTransactionState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => AddTransactionProvider(),
+      child: _AddTransactionScreen(),
+    );
+  }
 }
 
-class _AddTransactionState extends State<AddTransaction> {
-  DateTime? _selectedDate;
-  CategoryType? _selectedCategorytype;
-  CategoryModel? _selectedCategoryModel;
-  String? _categoryID;
+class _AddTransactionScreen extends StatefulWidget {
+  @override
+  State<_AddTransactionScreen> createState() => _AddTransactionScreenState();
+}
 
-  final _purpposeEditinfController = TextEditingController();
-  final _amountEditinfController = TextEditingController();
-
-  final _formkey = GlobalKey<FormState>();
-
+class _AddTransactionScreenState extends State<_AddTransactionScreen> {
   @override
   void initState() {
-    _selectedCategorytype = CategoryType.income;
     super.initState();
-  }
-
-  void _updateDate(DateTime? newDate) {
-    setState(() {
-      _selectedDate = newDate;
-    });
+    Provider.of<AddTransactionProvider>(context, listen: false)
+        .initializeState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AddTransactionProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -61,208 +55,245 @@ class _AddTransactionState extends State<AddTransaction> {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: Form(
-        key: _formkey,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListView(
-              children: [
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            Radio(
-                                activeColor:
-                                    const Color.fromARGB(255, 10, 92, 130),
-                                value: CategoryType.income,
-                                groupValue: _selectedCategorytype,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    _selectedCategorytype = CategoryType.income;
-                                    _categoryID = null;
-                                  });
-                                }),
-                            const Text('income'),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Radio(
-                                activeColor:
-                                    const Color.fromARGB(255, 10, 92, 130),
-                                value: CategoryType.expense,
-                                groupValue: _selectedCategorytype,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    _selectedCategorytype =
-                                        CategoryType.expense;
-                                    _categoryID = null;
-                                  });
-                                }),
-                            const Text('Expense'),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 7),
-                      child: Row(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+            key: provider.formKey,
+            child: ListView(children: [
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Row(
                         children: [
-                          Container(
-                              decoration: BoxDecoration(
-                                  color: const Color.fromARGB(255, 10, 92, 130),
-                                  borderRadius: BorderRadius.circular(10)),
-                              padding: const EdgeInsets.all(7),
-                              child: const Icon(
-                                Icons.menu_sharp,
-                                size: 18,
-                                color: Colors.white,
-                              )),
-                          const SizedBox(
-                            width: 20,
+                          Radio<CategoryType>(
+                            activeColor: const Color.fromARGB(255, 10, 92, 130),
+                            value: CategoryType.income,
+                            groupValue: provider.selectedCategoryType,
+                            onChanged: (_) => provider
+                                .setSelectedCategoryType(CategoryType.income),
                           ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ValueListenableBuilder(
-                                  valueListenable:
-                                      CategoryDB().expenseCategoryList,
-                                  builder: (context, value, child) =>
-                                      ValueListenableBuilder(
-                                    valueListenable:
-                                        CategoryDB().IncomeCategoryList,
-                                    builder: (context, value, child) =>
-                                        DropdownButton<String>(
-                                      hint: const Text('Select category'),
-                                      value: _categoryID,
-                                      items: (_selectedCategorytype ==
-                                                  CategoryType.income
-                                              ? CategoryDB().IncomeCategoryList
-                                              : CategoryDB()
-                                                  .expenseCategoryList)
-                                          .value
-                                          .map((e) {
-                                        return DropdownMenuItem(
-                                          value: e.id,
-                                          child: Text(e.name),
-                                          onTap: () {
-                                            _selectedCategoryModel = e;
-                                          },
-                                        );
-                                      }).toList(),
-                                      onChanged: (selectedValue) {
-                                        setState(() {
-                                          _categoryID = selectedValue;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                          const Text('Income'),
+                          const SizedBox(width: 16.0),
+                          Radio<CategoryType>(
+                            activeColor: const Color.fromARGB(255, 10, 92, 130),
+                            value: CategoryType.expense,
+                            groupValue: provider.selectedCategoryType,
+                            onChanged: (_) => provider
+                                .setSelectedCategoryType(CategoryType.expense),
                           ),
-                          IconButton(
-                              onPressed: () {
-                                addPopupOnly(
-                                    context: context,
-                                    selectedCategoryType:
-                                        _selectedCategorytype);
-                              },
-                              icon: const Icon(
-                                Icons.add_circle,
-                                color: Color.fromARGB(255, 10, 92, 130),
-                              ))
+                          const Text('Expense'),
                         ],
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 10, 92, 130),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: const EdgeInsets.all(7),
+                        child: const Icon(
+                          Icons.description,
+                          color: Colors.white,
+                          size: 20,
+                        ),
                       ),
-                    ),
-                    buildTransactionForm(
-                        _amountEditinfController,
-                        _purpposeEditinfController,
-                        context,
-                        _selectedDate,
-                        _updateDate),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      height: 40,
-                      width: 100,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromARGB(255, 10, 92, 130),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          value: provider.categoryID,
+                          items: provider.selectedCategoryType ==
+                                  CategoryType.income
+                              ? CategoryDB().getIncomeCategoryItems()
+                              : CategoryDB().getExpenseCategoryItems(),
+                          onChanged: (value) => provider.selectCategory(value!),
+                          validator: provider.validateCategory,
+                          decoration: InputDecoration(
+                            labelText: 'Category',
+                            border: InputBorder.none,
                           ),
-                          onPressed: () {
-                            addTransaction();
-
-                            if (_formkey.currentState!.validate()) {
-                              'SAVE THE DATA';
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 10, 92, 130),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: const EdgeInsets.all(7),
+                        child: const Icon(
+                          Icons.description,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        child: TextFormField(
+                          controller: provider.purposeEditingController,
+                          decoration: InputDecoration(
+                              labelText: 'Purpose', border: InputBorder.none),
+                          validator: (value) {
+                            if (value?.isEmpty ?? true) {
+                              return 'Please enter a purpose';
                             }
+                            return null;
                           },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 10, 92, 130),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: const EdgeInsets.all(7),
+                        child: const Icon(
+                          Icons.description,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        child: TextFormField(
+                          controller: provider.amountEditingController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: 'Amount',
+                            border: InputBorder.none,
+                          ),
+                          validator: (value) {
+                            if (value?.isEmpty ?? true) {
+                              return 'Please enter an amount';
+                            }
+                            final parseAmount = double.tryParse(value!);
+                            if (parseAmount! <= 0 || parseAmount == null) {
+                              return 'Please enter a valid amount';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 10, 92, 130),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.all(8),
+                          child: const Icon(
+                            Icons.calendar_month,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () => provider.selectDate(context),
+                          child: Container(
+                            height: 56.0,
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    provider.selectedDate == null
+                                        ? 'Select Date'
+                                        : DateFormat.yMd()
+                                            .format(provider.selectedDate!),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 10, 92, 130),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.all(8),
+                          child: const Icon(
+                            Icons.calendar_month,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomLeft,
+                        child: TextButton(
+                          onPressed: () => addPopupOnly(
+                            context: context,
+                            selectedCategoryType:
+                                provider.selectedCategoryType!,
+                          ),
                           child: const Text(
-                            'Submit',
-                            style: TextStyle(color: Colors.white),
-                          )),
+                            'Add  New Category',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20.0),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 10, 92, 130),
                     ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
+                    onPressed: () {
+                      if (provider.formKey.currentState!.validate()) {
+                        provider.addTransaction(context);
+                        Navigator.of(context).pop();
+                      }
+                    },
+                    child: Text(
+                      'Submit',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ])),
       ),
     );
   }
-
-  Future<void> addTransaction() async {
-    final purposetext = _purpposeEditinfController.text;
-    final amounttext = _amountEditinfController.text;
-    if (purposetext.isEmpty) {
-      return;
-    }
-    if (amounttext.isEmpty) {
-      return;
-    }
-    if (_categoryID == null) {
-      return;
-    }
-    if (_selectedDate == null) {
-      return;
-    }
-    if (_selectedCategoryModel == null) {
-      return;
-    }
-    final parseAmount = double.tryParse(amounttext);
-    if (parseAmount == null) {
-      return;
-    }
-    final model = transactionModel(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
-        purpose: purposetext,
-        amount: parseAmount,
-        date: _selectedDate!,
-        type: _selectedCategorytype!,
-        category: _selectedCategoryModel!);
-    await TransactionDB.instance.addTransaction(model);
-    // ignore: use_build_context_synchronously
-    Navigator.of(context).pop();
-    TransactionDB.instance.refresh();
-
-    AnimatedSnackBar.rectangle(
-      'Success',
-      'Transaction Added Successfully',
-      type: AnimatedSnackBarType.success,
-      brightness: Brightness.light,
-      duration: const Duration(seconds: 4),
-    ).show(context);
-  }
-}
-
-String parseDate(DateTime date) {
-  return DateFormat.MMMd().format(date);
 }

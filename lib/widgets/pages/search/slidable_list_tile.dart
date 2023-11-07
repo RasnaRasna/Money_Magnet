@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:money_magnet/widgets/pages/search/search.dart';
 
 import '../../../db/transaction/transaction_db.dart';
 import '../../../models/category/category_model.dart';
 import '../../../models/transactions/transaction_model.dart';
 import '../UpdateTransaction/update_transaction.dart';
+import 'search.dart';
 
 class SlidableTransaction extends StatelessWidget {
   const SlidableTransaction({super.key, required this.transaction});

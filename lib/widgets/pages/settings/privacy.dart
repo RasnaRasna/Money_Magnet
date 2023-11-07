@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 
 import '../../bottonm google/gbottom_bar.dart';
-// import 'package:google_fonts/google_fonts.dart';
 
 class Privacy extends StatelessWidget {
   const Privacy({super.key});
@@ -26,12 +26,10 @@ class Privacy extends StatelessWidget {
         appBar: AppBar(
           leading: IconButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(
+                Navigator.of(context).push(
                     MaterialPageRoute(builder: ((context) => Bottomnav())));
-                // Navigator.of(context).push(MaterialPageRoute(
-                //     builder: ((context) => const Bottomnav())));
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_back,
                 color: Colors.black,
               )),
@@ -55,7 +53,7 @@ class Privacy extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: Text(
-                      'Money  Moves',
+                      'Money  Magnet',
                       style: GoogleFonts.acme(fontSize: 30),
                     ),
                   ),

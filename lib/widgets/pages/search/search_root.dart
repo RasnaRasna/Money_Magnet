@@ -16,7 +16,7 @@ class CustomSearch extends StatelessWidget {
         body: Column(
           children: [
             SearchField(),
-            Expanded(
+            const Expanded(
               child: SearchTiles(),
             ),
           ],

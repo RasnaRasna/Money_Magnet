@@ -1,7 +1,7 @@
 import 'package:custom_date_range_picker/custom_date_range_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:money_magnet/widgets/pages/ViewAll/viewslide.dart';
+import 'package:money_magnet/widgets/pages/ViewAll/vieallslide.dart';
 
 import '../../../db/transaction/transaction_db.dart';
 import '../../../models/category/category_model.dart';

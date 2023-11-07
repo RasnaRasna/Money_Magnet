@@ -35,7 +35,6 @@ class TransactionDB implements TransactionDbFunctions {
 
   Future<void> refresh() async {
     final list = await gettAllTransaction();
-    list.sort((first, second) => second.date.compareTo(first.date));
     transactionListNotifier.value.clear();
     transactionListNotifier.value.addAll(list);
     transactionListNotifier.notifyListeners();
@@ -43,8 +42,6 @@ class TransactionDB implements TransactionDbFunctions {
     allList.notifyListeners();
     searchResult.notifyListeners();
     overViewListNotifier.notifyListeners();
-
-    ///
   }
 
   @override
@@ -58,11 +55,6 @@ class TransactionDB implements TransactionDbFunctions {
     final db = await Hive.openBox<transactionModel>(TRANSACTION_DB_NAME);
     await db.delete(id);
     await refresh();
-    // await gettAllTransaction();
-    searchQueryController.clear();
-    overViewListNotifier.notifyListeners();
-    // transactiontype.notifyListeners();
-    listtodisplay.notifyListeners();
   }
 
   @override
@@ -70,9 +62,6 @@ class TransactionDB implements TransactionDbFunctions {
     final db = await Hive.openBox<transactionModel>(TRANSACTION_DB_NAME);
     await db.put(obj.id, obj);
     await refresh();
-    await gettAllTransaction();
-    // transactiontype.notifyListeners();
-    listtodisplay.notifyListeners();
-    overViewListNotifier.notifyListeners();
+    gettAllTransaction();
   }
 }

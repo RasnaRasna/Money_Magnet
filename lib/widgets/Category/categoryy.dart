@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:money_magnet/widgets/Category/popup_category.dart';
@@ -42,6 +44,7 @@ class Categoryy extends StatelessWidget {
                       return IconButton(
                         onPressed: () {
                           expense.value = !expense.value;
+                          log(expense.value.toString());
                         },
                         icon: const Icon(
                           Icons.grid_view,
@@ -51,6 +54,7 @@ class Categoryy extends StatelessWidget {
                       return IconButton(
                           onPressed: (() {
                             expense.value = !expense.value;
+                            log(expense.value.toString());
                           }),
                           icon: const Icon(Icons.list));
                     }
@@ -98,7 +102,7 @@ class Categoryy extends StatelessWidget {
             floatingActionButton: Padding(
               padding: const EdgeInsets.symmetric(vertical: 62),
               child: FloatingActionButton(
-                backgroundColor: const Color.fromARGB(255, 10, 92, 130),
+                backgroundColor: Color.fromARGB(255, 10, 92, 130),
                 onPressed: () {
                   showCategoryAddPopup(context);
                 },

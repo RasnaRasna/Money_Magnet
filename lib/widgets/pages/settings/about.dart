@@ -25,13 +25,8 @@ class About extends StatelessWidget {
         appBar: AppBar(
           leading: IconButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => const Bottomnav(),
-                  ),
-                );
-                // Navigator.of(context).push(MaterialPageRoute(
-                //     builder: ((context) => const Bottomnav())));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: ((context) => Bottomnav())));
               },
               icon: const Icon(
                 Icons.arrow_back,
@@ -54,7 +49,7 @@ class About extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 70),
                   child: Text(
-                    'Money  Moves',
+                    'Money  Magnet',
                     style: GoogleFonts.acme(fontSize: 30),
                   ),
                 ),
@@ -68,7 +63,7 @@ class About extends StatelessWidget {
                   width: 30,
                 ),
                 const Text(
-                  'version 1.0.2',
+                  'version 1.0.1',
                   style: TextStyle(color: Colors.grey),
                 )
               ],

@@ -1,11 +1,12 @@
 import 'package:collection/collection.dart';
+
 import 'package:flutter/material.dart';
-import 'package:money_magnet/models/transactions/transaction_model.dart';
 
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../db/transaction/transaction_db.dart';
 import '../../../models/category/category_model.dart';
+import '../../../models/transactions/transaction_model.dart';
 
 class ExpenseStatics extends StatelessWidget {
   CategoryType incomeOrExpense;
@@ -48,7 +49,8 @@ class ExpenseStatics extends StatelessWidget {
                         end: Alignment.bottomCenter,
                       ),
                     ),
-                    child: data.isNotEmpty
+                    child: TransactionDB
+                            .instance.transactionListNotifier.value.isNotEmpty
                         ? SfCircularChart(
                             series: <CircularSeries>[
                               DoughnutSeries(
@@ -58,15 +60,14 @@ class ExpenseStatics extends StatelessWidget {
                                   dataLabelSettings:
                                       const DataLabelSettings(isVisible: true)),
                             ],
-                            legend: const Legend(
+                            legend: Legend(
                                 isVisible: true,
-                                // position: LegendPosition.left,
-                                textStyle: TextStyle(fontSize: 20)),
+                                // position: LegendPosition.bottom,
+                                textStyle: const TextStyle(fontSize: 20)),
                           )
                         : Align(
                             alignment: Alignment.center,
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
                                   'lib/assets/images/output-onlinegiftools (2).gif',

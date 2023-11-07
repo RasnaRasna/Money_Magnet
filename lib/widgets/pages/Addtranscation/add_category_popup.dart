@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/Material.dart';
 
 import '../../../db/category/category_db.dart';
 import '../../../models/category/category_model.dart';
 
-Future<void> addPopupOnly({context, required selectedCategoryType}) async {
+Future<void> addPopupOnly(
+    {required BuildContext context,
+    required CategoryType selectedCategoryType}) async {
   final nameEditingController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   await showDialog(
@@ -32,29 +34,25 @@ Future<void> addPopupOnly({context, required selectedCategoryType}) async {
             ),
           ),
           ElevatedButton(
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-                'SAVE THE DATA';
-              }
-              final name = nameEditingController.text;
-              if (name.isEmpty) {
-                return;
-              }
+            onPressed: () async {
+              if (formKey.currentState != null &&
+                  formKey.currentState!.validate()) {
+                final name = nameEditingController.text;
+                if (name.isEmpty) {
+                  return;
+                }
 
-              final category = CategoryModel(
-                id: DateTime.now().millisecondsSinceEpoch.toString(),
-                name: name,
-                type: selectedCategoryType,
-              );
-              CategoryDB.instance.insertCategory(category);
-              Navigator.of(ctx).pop();
+                final category = CategoryModel(
+                  id: DateTime.now().millisecondsSinceEpoch.toString(),
+                  name: name,
+                  type: selectedCategoryType,
+                );
+                await CategoryDB.instance.insertCategory(category);
+                CategoryDB.instance.refreshUI();
+                Navigator.of(ctx).pop();
+              }
             },
-            child: const Text(
-              'Add',
-              style: TextStyle(
-                color: Color.fromARGB(255, 5, 67, 96),
-              ),
-            ),
+            child: const Text('Add'),
           ),
         ],
       );

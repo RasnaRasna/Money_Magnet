@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:money_magnet/models/category/category_model.dart';
 
 import '../../../OnbordingScreen/splash.dart';
-import '../../../db/transaction/transaction_db.dart';
+import '../../../db/providers/treansation_db.dart';
+import '../../../models/category/category_model.dart';
 import '../../../models/transactions/transaction_model.dart';
 
 Future<void> resetAllData(BuildContext context) async {
@@ -11,6 +13,7 @@ Future<void> resetAllData(BuildContext context) async {
   // shared.clear();
 
   if (Splashscreens.getdata().isEmpty) {
+    log('is empty');
   } else {
     await Splashscreens.getdata().clear();
   }
@@ -19,6 +22,7 @@ Future<void> resetAllData(BuildContext context) async {
 
   categoryDB.clear();
 
+  // ignore: non_constant_identifier_names
   final TransactionDB =
       await Hive.openBox<transactionModel>(TRANSACTION_DB_NAME);
   TransactionDB.clear();

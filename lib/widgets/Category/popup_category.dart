@@ -1,8 +1,7 @@
-import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:money_magnet/models/category/category_model.dart';
 
 import '../../db/category/category_db.dart';
-import '../../models/category/category_model.dart';
 
 ValueNotifier<CategoryType> selectedCategoryNotifier =
     ValueNotifier(CategoryType.income);
@@ -47,37 +46,25 @@ Future<void> showCategoryAddPopup(BuildContext context) async {
             Padding(
               padding: const EdgeInsets.all(15),
               child: ElevatedButton(
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      'SAVE THE DATA';
-                    }
-                    final name = nameEditingController.text;
-                    if (name.isEmpty) {
-                      return;
-                    }
-                    final type = selectedCategoryNotifier.value;
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    'SAVE THE DATA';
+                  }
+                  final name = nameEditingController.text;
+                  if (name.isEmpty) {
+                    return;
+                  }
+                  final type = selectedCategoryNotifier.value;
 
-                    final category = CategoryModel(
-                        id: DateTime.now().millisecondsSinceEpoch.toString(),
-                        name: name,
-                        type: type);
-
-                    AnimatedSnackBar.rectangle(
-                      'Success',
-                      'Category Added Successfully',
-                      type: AnimatedSnackBarType.success,
-                      brightness: Brightness.light,
-                      duration: const Duration(seconds: 4),
-                    ).show(context);
-                    CategoryDB.instance.insertCategory(category);
-                    Navigator.of(ctx).pop();
-                  },
-                  child: const Text(
-                    'Add',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 5, 67, 96),
-                    ),
-                  )),
+                  final category = CategoryModel(
+                      id: DateTime.now().millisecondsSinceEpoch.toString(),
+                      name: name,
+                      type: type);
+                  CategoryDB.instance.insertCategory(category);
+                  Navigator.of(ctx).pop();
+                },
+                child: const Text('Add'),
+              ),
             )
           ],
         ),
@@ -100,7 +87,6 @@ class Radiobutton extends StatelessWidget {
           valueListenable: selectedCategoryNotifier,
           builder: (BuildContext ctx, CategoryType newCategory, Widget? _) {
             return Radio<CategoryType>(
-                activeColor: Color.fromARGB(255, 5, 67, 96),
                 value: type,
                 groupValue: selectedCategoryNotifier.value,
                 onChanged: (value) {

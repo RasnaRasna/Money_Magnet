@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:money_magnet/widgets/pages/settings/privacy.dart';
 import 'package:money_magnet/widgets/pages/settings/reset.dart';
+
+// import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'about.dart';
-
-// import 'package:share_plus/share_plus.dart';
 
 class MenuNavbar extends StatelessWidget {
   const MenuNavbar({super.key});
@@ -211,8 +212,8 @@ class MenuNavbar extends StatelessWidget {
 
 // Future share() async {
 //   await FlutterShare.share(
-//       title: ' Money Moves',
-//       text: 'Money Moves ',
+//       title: ' Money Magnet',
+//       text: 'Money Magnet ',
 //       linkUrl:
 //           'https://play.google.com/store/apps/details?id=in.rasnaminnu.money_moves');
 // }

@@ -13,6 +13,7 @@ Widget viewallTransactionList(
   return ListView.separated(
     itemBuilder: ((context, index) {
       //values
+
       final value = transactions[index];
 
       return Card(
