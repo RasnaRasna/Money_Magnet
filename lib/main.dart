@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 import 'package:provider/provider.dart';
-
 import 'OnbordingScreen/splash.dart';
 import 'db/providers/addtransaction_provider.dart';
 import 'db/providers/category_provider.dart';
 import 'db/providers/updateprovider.dart';
 import 'models/category/category_model.dart';
 import 'models/transactions/transaction_model.dart';
+
+
 
 int? isviewsd;
 
